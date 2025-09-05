@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button"
 import { Calendar, Clock, User, ArrowRight, Eye } from "lucide-react"
 import Link from "next/link"
 import type { BlogArticle } from "@/lib/blog-data"
+import { Compare } from "../ui/compare"
 
 interface SpotlightArticleProps {
   article: BlogArticle
@@ -17,21 +18,30 @@ export function SpotlightArticle({ article }: SpotlightArticleProps) {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
         {/* Image */}
         <div className="relative h-64 lg:h-full overflow-hidden">
-          <img
+          {/* <img
             src={article.image || "/placeholder.svg"}
             alt={article.title}
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+          /> */}
+          <Compare
+            firstImage="/feed/nascence-group-old.png"
+            secondImage="/feed/nascence-group-rebranded.png"
+            firstImageClassName="object-cover object-left-top w-full"
+            secondImageClassname="object-cover object-left-top w-full"
+            className="h-full w-full rounded-[22px] md:rounded-lg"
+            slideMode="hover"
+            autoplay={true}
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
           <div className="absolute top-4 left-4">
             <Badge className="bg-blue-600 hover:bg-blue-700 text-white">Featured</Badge>
           </div>
-          <div className="absolute bottom-4 right-4">
+          {/* <div className="absolute bottom-4 right-4">
             <div className="flex items-center space-x-2 text-white text-sm">
               <Eye className="w-4 h-4" />
               <span>{article.views.toLocaleString()} views</span>
             </div>
-          </div>
+          </div> */}
         </div>
 
         {/* Content */}
@@ -49,7 +59,7 @@ export function SpotlightArticle({ article }: SpotlightArticleProps) {
             </div>
           </div>
 
-          <h1 className="text-2xl lg:text-4xl font-bold text-foreground mb-4 leading-tight group-hover:text-blue-600 transition-colors duration-300">
+          <h1 className="text-2xl lg:text-4xl font-bold text-foreground mb-4 leading-tight group-hover:text-primary transition-colors duration-300">
             {article.title}
           </h1>
 
@@ -74,7 +84,7 @@ export function SpotlightArticle({ article }: SpotlightArticleProps) {
           <Button
             asChild
             size="lg"
-            className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 group/btn"
+            className="bg-primary group/btn"
           >
             <Link href={`/feed/${article.slug}`}>
               Read Full Article

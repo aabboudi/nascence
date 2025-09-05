@@ -1,12 +1,13 @@
 import { SectionTitle } from '@/components/section-title';
-import { CTA } from '@/components/cta';
+import { ServicesSection } from '@/components/services-section';
+// import { CTA } from '@/components/cta';
 
-import Link from "next/link"
-import { Badge } from "@/components/ui/badge"
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { ArrowRight } from 'lucide-react'
-import { servicesData } from "@/lib/service-data"
-import { cn } from "@/lib/utils"
+// import Link from "next/link"
+// import { Badge } from "@/components/ui/badge"
+// import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
+// import { ArrowRight } from 'lucide-react'
+// import { servicesData } from "@/lib/service-data"
+// import { cn } from "@/lib/utils"
 
 export default function ServicesPage() {
   return (
@@ -19,6 +20,7 @@ export default function ServicesPage() {
         subtitle="Explore our comprehensive range of support services, each tailored to meet the unique demands of specific industries and operational environments."
       />
       {/* <CTA action='test' /> */}
+      <ServicesSection />
     </div>
   )
 }

@@ -30,12 +30,12 @@ export function ArticleCard({ article, index }: ArticleCardProps) {
             {article.category}
           </Badge>
         </div>
-        <div className="absolute bottom-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+        {/* <div className="absolute bottom-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
           <div className="flex items-center space-x-1 text-white text-xs">
             <Eye className="w-3 h-3" />
             <span>{article.views.toLocaleString()}</span>
           </div>
-        </div>
+        </div> */}
       </div>
 
       <CardHeader className="pb-3">
@@ -46,7 +46,7 @@ export function ArticleCard({ article, index }: ArticleCardProps) {
             </Badge>
           ))}
         </div>
-        <h3 className="text-lg font-bold text-foreground leading-tight group-hover:text-blue-600 transition-colors duration-300 line-clamp-2">
+        <h3 className="text-lg font-bold text-foreground leading-tight group-hover:text-primary transition-colors duration-300 line-clamp-2">
           <Link href={`/feed/${article.slug}`}>{article.title}</Link>
         </h3>
       </CardHeader>
@@ -74,7 +74,7 @@ export function ArticleCard({ article, index }: ArticleCardProps) {
 
         <Link
           href={`/feed/${article.slug}`}
-          className="inline-flex items-center text-blue-600 hover:text-blue-700 font-medium text-sm group/link"
+          className="inline-flex items-center text-primary font-medium text-sm group/link"
         >
           Read More
           <ArrowRight className="w-4 h-4 ml-1 group-hover/link:translate-x-1 transition-transform duration-200" />

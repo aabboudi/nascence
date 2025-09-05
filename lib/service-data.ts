@@ -1,72 +1,36 @@
 import type React from "react"
-import { Syringe, Building, TreePine, Trash2, HardHat, HeartPulse, Shield, CheckCircle, DollarSign, Zap, Leaf, Users, Clock, Lock, RefreshCw, Smile, Briefcase, Lightbulb, Handshake, Scale, Recycle, Truck, Wifi, Server, Headphones, Database, UserCheck, ClipboardList, Stethoscope, CalendarCheck, Wrench, Snowflake, Droplets, Mountain } from 'lucide-react'
 
-// // Custom icons (moved from previous page.tsx)
-// function Snowflake(props: React.SVGProps<SVGSVGElement>) {
-//   return (
-//     <svg
-//       {...props}
-//       xmlns="http://www.w3.org/2000/svg"
-//       width="24"
-//       height="24"
-//       viewBox="0 0 24 24"
-//       fill="none"
-//       stroke="currentColor"
-//       strokeWidth="2"
-//       strokeLinecap="round"
-//       strokeLinejoin="round"
-//     >
-//       <line x1="2" x2="22" y1="12" y2="12" />
-//       <line x1="12" x2="12" y1="2" y2="22" />
-//       <path d="M20 16v-4h-4" />
-//       <path d="M4 8v4h4" />
-//       <path d="M16 4h4v4" />
-//       <path d="M8 20h-4v-4" />
-//     </svg>
-//   )
-// }
-
-// function Droplets(props: React.SVGProps<SVGSVGElement>) {
-//   return (
-//     <svg
-//       {...props}
-//       xmlns="http://www.w3.org/2000/svg"
-//       width="24"
-//       height="24"
-//       viewBox="0 0 24 24"
-//       fill="none"
-//       stroke="currentColor"
-//       strokeWidth="2"
-//       strokeLinecap="round"
-//       strokeLinejoin="round"
-//     >
-//       <path d="M7 16.3c2.8 0 5-2.24 5-5s-2.2-5-5-5c-1.3 0-2.5.56-3.4 1.5C2.56 7.5 2 8.7 2 10c0 2.8 2.2 5 5 5Z" />
-//       <path d="M12.5 13h5c1.3 0 2.5-.56 3.4-1.5 1-1 1.5-2.2 1.5-3.5 0-2.8-2.2-5-5-5-1.3 0-2.5.56-3.4 1.5-.9.9-1.5 2.1-1.5 3.4 0 2.8 2.2 5 5 5Z" />
-//     </svg>
-//   )
-// }
-
-// function Mountain(props: React.SVGProps<SVGSVGElement>) {
-//   return (
-//     <svg
-//       {...props}
-//       xmlns="http://www.w3.org/2000/svg"
-//       width="24"
-//       height="24"
-//       viewBox="0 0 24 24"
-//       fill="none"
-//       stroke="currentColor"
-//       strokeWidth="2"
-//       strokeLinecap="round"
-//       strokeLinejoin="round"
-//     >
-//       <path d="M8 3L4 11V16H20V11L16 3H8Z" />
-//       <path d="M12 16V22" />
-//       <path d="M16 16V22" />
-//       <path d="M8 16V22" />
-//     </svg>
-//   )
-// }
+import {
+  Wrench,
+  Building,
+  HardHat,
+  ClipboardList,
+  Zap,
+  DollarSign,
+  Shield,
+  Smile,
+  Leaf,
+  Sprout,
+  Recycle,
+  TreePine,
+  HeartPulse,
+  Stethoscope,
+  Syringe,
+  ShieldCheck,
+  Users,
+  Laptop,
+  Cloud,
+  Lock,
+  Server,
+  BrushCleaning,
+  Droplets,
+  SprayCan,
+  RecycleIcon,
+  Eye,
+  Key,
+  Bell,
+  Camera,
+} from "lucide-react"
 
 export interface ServiceDetail {
   id: string
@@ -82,217 +46,331 @@ export interface ServiceDetail {
   ctaLink: string
   icon: React.ComponentType<{ className?: string }>
   gradient: string
+
+  // From services_for_slugs
+  subtitle: string
+  tagline: string
+  description: string
+  services: string[]
+  ctaTitle: string
+  ctaDescription: string
+  solutionTitle: string
+  solutionTagline: string
+  solutionDescription: string
 }
+
 
 export const servicesData: ServiceDetail[] = [
   {
-    id: "janitorial-healthcare",
-    slug: "janitorial-healthcare",
-    name: "Janitorial Support",
-    shortDescription: "Specialized cleaning and disinfection for healthcare facilities, ensuring patient safety and hygiene.",
-    headline: "Ensuring Patient Safety and Hygiene Through Specialized Janitorial Support",
-    overview: "In healthcare facilities, cleanliness is paramount to patient safety and infection control. Our specialized janitorial services go beyond surface cleaning to create sterile, hygienic environments that protect patients and staff.",
+    id: "facilities-maintenance",
+    slug: "facilities-maintenance",
+    name: "Facilities Maintenance",
+    shortDescription: "Full-spectrum building and equipment support",
+    headline: "Keeping Facilities Running at Peak Performance",
+    overview:
+      "Comprehensive facilities management that keeps your operations running smoothly. Our expert technicians provide preventive maintenance, emergency repairs, and system optimization to minimize downtime and maximize efficiency.",
     features: [
-      { icon: Syringe, text: "Advanced Disinfection Protocols (EPA-approved)" },
-      { icon: Building, text: "Restroom Sanitation & Odor Control" },
-      { icon: RefreshCw, text: "Terminal Cleaning for Operating Rooms & Patient Areas" },
-      { icon: Trash2, text: "Biohazard Waste Disposal Management" },
-      { icon: CheckCircle, text: "Floor Care & Maintenance (e.g., VCT, LVT, Epoxy)" },
-      { icon: Shield, text: "Cross-Contamination Prevention" },
+      { icon: Wrench, text: "HVAC system maintenance" },
+      { icon: Building, text: "Electrical & plumbing services" },
+      { icon: HardHat, text: "Equipment repair & replacement" },
+      { icon: ClipboardList, text: "Construction support services" },
     ],
     industryAlignment: {
-      title: "Healthcare Sanitation & Infection Control Standards",
+      title: "Operational Readiness & Safety Compliance",
       points: [
-        "Adherence to CDC guidelines for environmental cleaning",
-        "Compliance with OSHA bloodborne pathogen standards",
-        "Strict protocols for HIPAA and patient privacy",
-        "Use of hospital-grade disinfectants and equipment",
+        "Adherence to OSHA workplace safety standards",
+        "Integration with preventive maintenance best practices",
+        "Compliance with local building and fire codes",
+        "Support for sustainable energy-efficient operations",
       ],
     },
     valuePropositions: [
-      { icon: DollarSign, text: "Lower Infection Risk & Improved Patient Outcomes" },
-      { icon: Scale, text: "Ensured Regulatory Compliance & Audit Readiness" },
-      { icon: Smile, text: "Enhanced Patient & Staff Trust and Confidence" },
-      { icon: Briefcase, text: "Professional & Hygienic Facility Presentation" },
+      { icon: Zap, text: "Reduced Downtime & Increased Productivity" },
+      { icon: DollarSign, text: "Optimized Maintenance Costs" },
+      { icon: Shield, text: "Safety & Compliance Assurance" },
+      { icon: Smile, text: "Improved Employee & Occupant Comfort" },
     ],
-    ctaText: "Schedule a Walkthrough",
+    ctaText: "Schedule a Facilities Assessment",
     ctaLink: "#contact",
-    icon: Syringe,
-    gradient: "from-red-500 to-pink-500",
-  },
-  {
-    id: "facilities-corporate",
-    slug: "facilities-corporate",
-    name: "Facilities Support",
-    shortDescription: "Comprehensive facilities management for corporate offices, optimizing workplace operations and efficiency.",
-    headline: "Optimizing Workplace Operations for Peak Corporate Performance",
-    overview: "A well-managed corporate office is crucial for productivity, employee well-being, and brand image. Our facilities support services ensure your workplace operates seamlessly, allowing your team to focus on core business objectives.",
-    features: [
-      { icon: Wrench, text: "Preventive & Reactive Maintenance Coordination" },
-      { icon: Handshake, text: "Vendor Management & Contract Oversight" },
-      { icon: Lightbulb, text: "Energy Management & Efficiency Solutions" },
-      { icon: Users, text: "Space Planning & Office Reconfiguration" },
-      { icon: Clock, text: "24/7 Emergency Response & Support" },
-      { icon: ClipboardList, text: "Asset Management & Inventory Control" },
-    ],
-    industryAlignment: {
-      title: "Service-Level Expectations & Business Continuity",
-      points: [
-        "Adherence to agreed-upon Service Level Agreements (SLAs)",
-        "Integration with business continuity and disaster recovery plans",
-        "Compliance with building codes and safety regulations",
-        "Focus on minimizing disruption to daily operations",
-      ],
-    },
-    valuePropositions: [
-      { icon: Zap, text: "Smooth Operations & Reduced Downtime" },
-      { icon: DollarSign, text: "Optimized Budget Control & Cost Savings" },
-      { icon: Smile, text: "Enhanced Employee Satisfaction & Productivity" },
-      { icon: Briefcase, text: "Professional & Well-Maintained Corporate Image" },
-    ],
-    ctaText: "Schedule a Consultation",
-    ctaLink: "#contact",
-    icon: Building,
-    gradient: "from-purple-500 to-indigo-500",
-  },
-  {
-    id: "grounds-government",
-    slug: "grounds-government",
-    name: "Grounds Maintenance",
-    shortDescription: "Year-round grounds care for federal and municipal government campuses, emphasizing appearance, security, and sustainability.",
-    headline: "Maintaining Pristine, Secure, and Sustainable Government Campuses",
-    overview: "The grounds of federal and municipal government campuses reflect national pride and operational readiness. Our grounds maintenance services ensure these properties are not only aesthetically pleasing but also secure, sustainable, and compliant with federal mandates.",
-    features: [
-      { icon: TreePine, text: "Professional Lawn Care & Landscaping" },
-      { icon: Leaf, text: "Tree & Shrub Pruning and Health Management" },
-      { icon: CalendarCheck, text: "Seasonal Cleanup & Preparation" },
-      { icon: Snowflake, text: "Snow & Ice Removal (24/7 Response)" },
-      { icon: Droplets, text: "Irrigation System Monitoring & Optimization" },
-      { icon: Mountain, text: "Erosion Control & Stormwater Management" },
-    ],
-    industryAlignment: {
-      title: "Federal Compliance & Eco-Responsibility",
-      points: [
-        "Compliance with GSA and DoD grounds maintenance standards",
-        "Adherence to federal environmental regulations (e.g., NEPA)",
-        "Implementation of sustainable landscaping practices (e.g., IPM)",
-        "Focus on native plant species and water conservation",
-      ],
-    },
-    valuePropositions: [
-      { icon: Smile, text: "Enhanced Curb Appeal & Public Perception" },
-      { icon: Shield, text: "Mission-Ready & Secure Property" },
-      { icon: Leaf, text: "Demonstrated Environmental Stewardship" },
-      { icon: DollarSign, text: "Cost-Effective & Efficient Grounds Management" },
-    ],
-    ctaText: "Request a Free Site Assessment",
-    ctaLink: "#contact",
-    icon: TreePine,
-    gradient: "from-green-500 to-emerald-500",
-  },
-  {
-    id: "waste-retail",
-    slug: "waste-retail",
-    name: "Solid Waste Collection",
-    shortDescription: "Efficient waste management and recycling services for retail shopping centers and commercial real estate.",
-    headline: "Maintaining Impeccable Common Areas for Thriving Retail & Commercial Complexes",
-    overview: "Cleanliness and efficient waste management are critical for the success of retail shopping centers and commercial real estate. Our solid waste collection services ensure your complex maintains a pristine appearance, enhancing tenant satisfaction and customer experience.",
-    features: [
-      { icon: Trash2, text: "Scheduled Trash Pickup & Disposal" },
-      { icon: Recycle, text: "Comprehensive Recycling Programs" },
-      { icon: Truck, text: "Bulk Item Removal & Special Hauls" },
-      { icon: Database, text: "Waste Stream Management & Reporting" },
-      { icon: Building, text: "Compactor & Baler Servicing" },
-      { icon: Clock, text: "Flexible Pickup Schedules (Daily, Weekly, On-Demand)" },
-    ],
-    industryAlignment: {
-      title: "Environmental Policies & Local Regulations",
-      points: [
-        "Compliance with local waste management ordinances",
-        "Adherence to environmental protection agency guidelines",
-        "Support for LEED certification requirements (waste diversion)",
-        "Implementation of best practices for odor and pest control",
-      ],
-    },
-    valuePropositions: [
-      { icon: Smile, text: "Pristine Presentation & Enhanced Customer Experience" },
-      { icon: Users, text: "Increased Tenant Satisfaction & Retention" },
-      { icon: Leaf, text: "Improved Sustainability Metrics & Brand Image" },
-      { icon: DollarSign, text: "Optimized Waste Costs & Operational Efficiency" },
-    ],
-    ctaText: "Get a Quote Today",
-    ctaLink: "#contact",
-    icon: Trash2,
+    icon: Wrench,
     gradient: "from-orange-500 to-red-500",
+    subtitle: "RELIABLE FACILITIES YOU CAN COUNT ON",
+    tagline: "Expert maintenance for every corner of your operation",
+    description:
+      "Our facilities team delivers a complete range of services to keep your environment efficient, safe, and compliant. From HVAC systems to electrical and plumbing, we make sure your operations run without interruption.",
+    services: [
+      "Preventive maintenance programs",
+      "Emergency repair services",
+      "HVAC repair and replacement",
+      "Electrical and plumbing services",
+      "Building and system inspections",
+    ],
+    ctaTitle: "Facilities That Never Let You Down",
+    ctaDescription:
+      "Minimize downtime, reduce costs, and ensure safety with our proactive facilities maintenance approach.",
+    solutionTitle: "FULL-SERVICE FACILITIES MANAGEMENT",
+    solutionTagline: "From preventive care to emergency response",
+    solutionDescription:
+      "Our facilities services combine planned maintenance with rapid-response repair teams. We provide detailed reporting, compliance documentation, and system optimization tailored to your organization’s needs.",
   },
   {
-    id: "it-warehouse",
-    slug: "it-warehouse",
-    name: "IT Support",
-    shortDescription: "Ensuring maximum uptime and robust security for industrial warehouse and logistics IT systems.",
-    headline: "Ensuring Uptime and Operational Continuity for Critical Warehouse & Logistics IT",
-    overview: "In industrial warehouses and logistics operations, IT systems are the backbone of efficiency. Our IT support services are designed to ensure maximum uptime, seamless data flow, and robust security, preventing costly disruptions to your supply chain.",
+    id: "grounds-maintenance",
+    slug: "grounds-maintenance",
+    name: "Grounds Maintenance",
+    shortDescription: "Landscaping and exterior care",
+    headline: "Sustainable Outdoor Care for Every Season",
+    overview:
+      "Professional grounds management services that keep your outdoor spaces safe, functional, and attractive. Our teams specialize in landscaping, seasonal upkeep, and environmentally responsible grounds care.",
     features: [
-      { icon: Wifi, text: "24/7 Network Monitoring & Management" },
-      { icon: Headphones, text: "Responsive Help Desk Support" },
-      { icon: Server, text: "Server & Infrastructure Maintenance" },
-      { icon: Lock, text: "Cybersecurity & Data Protection" },
-      { icon: Database, text: "Data Backup & Disaster Recovery" },
-      { icon: HardHat, text: "On-Site & Remote Technical Support" },
+      { icon: Leaf, text: "Landscaping & lawn care" },
+      { icon: Sprout, text: "Seasonal planting" },
+      { icon: TreePine, text: "Tree & shrub maintenance" },
+      { icon: Recycle, text: "Sustainable grounds care" },
     ],
     industryAlignment: {
-      title: "Uptime & Security Requirements for Logistics",
+      title: "Environmental Responsibility & Site Readiness",
       points: [
-        "Adherence to strict uptime Service Level Agreements (SLAs)",
-        "Compliance with industry data security standards (e.g., NIST)",
-        "Integration with Warehouse Management Systems (WMS)",
-        "Focus on operational continuity and supply chain resilience",
+        "Compliance with EPA environmental standards",
+        "Erosion control and sustainable practices",
+        "ADA-compliant outdoor accessibility",
+        "Support for LEED green building certification",
       ],
     },
     valuePropositions: [
-      { icon: Zap, text: "Reduced Downtime & Operational Disruptions" },
-      { icon: DollarSign, text: "Enhanced Cost Efficiency & ROI" },
-      { icon: Shield, text: "Robust Data Security & Compliance" },
-      { icon: Users, text: "Smoother Operations & Increased Productivity" },
+      { icon: Shield, text: "Safe and accessible outdoor areas" },
+      { icon: Leaf, text: "Eco-friendly sustainable practices" },
+      { icon: Smile, text: "Enhanced curb appeal" },
+      { icon: Zap, text: "Year-round reliability" },
     ],
-    ctaText: "Contact IT Support Specialists",
+    ctaText: "Request Grounds Services",
     ctaLink: "#contact",
-    icon: HardHat,
-    gradient: "from-cyan-500 to-blue-500",
+    icon: Leaf,
+    gradient: "from-green-500 to-emerald-500",
+    subtitle: "SUSTAINABLE GROUNDS CARE",
+    tagline: "Beautiful, safe, and functional landscapes year-round",
+    description:
+      "We provide full-service landscaping and exterior maintenance to create safe, appealing, and sustainable outdoor spaces.",
+    services: [
+      "Routine landscaping and lawn care",
+      "Snow and ice removal",
+      "Tree trimming and maintenance",
+      "Pest and invasive species control",
+      "Sustainable irrigation solutions",
+    ],
+    ctaTitle: "Grounds That Impress",
+    ctaDescription:
+      "Create safe, attractive, and environmentally responsible outdoor environments.",
+    solutionTitle: "EXTERIOR FACILITIES MANAGEMENT",
+    solutionTagline: "Sustainable outdoor care tailored to your needs",
+    solutionDescription:
+      "From seasonal upkeep to large-scale landscaping, our grounds services ensure safe, attractive, and eco-conscious outdoor environments.",
   },
   {
-    id: "healthcare-support-clinic",
-    slug: "healthcare-support-clinic",
-    name: "Health Care Support",
-    shortDescription: "Non-clinical patient-focused support services for medical clinics and outpatient centers, enhancing patient experience.",
-    headline: "Specialized Patient-Focused Support Services for Optimal Clinic Operations",
-    overview: "Medical clinics and outpatient centers require seamless operations to deliver exceptional patient care. Our healthcare support services provide essential non-clinical assistance, allowing your medical staff to focus entirely on patient well-being.",
+    id: "healthcare-support",
+    slug: "healthcare-support",
+    name: "Healthcare Support",
+    shortDescription: "Onsite occupational and wellness solutions",
+    headline: "Supporting Workforce Health & Compliance",
+    overview:
+      "Comprehensive health services that protect employees and support organizational readiness. We deliver occupational health, medical screenings, and emergency response solutions tailored to your workforce.",
     features: [
-      { icon: UserCheck, text: "Patient Intake & Registration Assistance" },
-      { icon: CalendarCheck, text: "Appointment Scheduling & Coordination" },
-      { icon: Stethoscope, text: "Non-Clinical Patient Navigation & Guidance" },
-      { icon: ClipboardList, text: "Administrative & Clerical Support" },
-      { icon: Syringe, text: "Medical Supply Management & Inventory" },
-      { icon: Building, text: "Facility Wayfinding & Patient Flow Optimization" },
+      { icon: HeartPulse, text: "Occupational health screenings" },
+      { icon: Stethoscope, text: "Onsite medical support" },
+      { icon: Syringe, text: "Immunization & testing" },
+      { icon: ShieldCheck, text: "Workforce wellness programs" },
     ],
     industryAlignment: {
-      title: "HIPAA & Facility Accreditation Standards",
+      title: "Workforce Safety & Regulatory Compliance",
       points: [
-        "Strict adherence to HIPAA for patient privacy and data security",
-        "Compliance with facility accreditation standards (e.g., Joint Commission)",
-        "Training in patient-centered care and communication",
-        "Protocols for maintaining a clean and safe patient environment",
+        "OSHA-mandated health monitoring compliance",
+        "HIPAA-secure medical handling",
+        "Emergency preparedness and response standards",
+        "Alignment with workforce readiness policies",
       ],
     },
     valuePropositions: [
-      { icon: Smile, text: "Improved Patient Experience & Satisfaction" },
-      { icon: Users, text: "Allows Clinical Staff to Focus on Core Care" },
-      { icon: Zap, text: "Enhanced Operational Efficiency & Workflow" },
-      { icon: Shield, text: "Ensured Compliance & Reduced Administrative Burden" },
+      { icon: Users, text: "Healthier, safer employees" },
+      { icon: Shield, text: "Compliance with health regulations" },
+      { icon: Zap, text: "Reduced absenteeism" },
+      { icon: Smile, text: "Improved employee well-being" },
     ],
-    ctaText: "Connect with Our Care Support Team",
+    ctaText: "Explore Health Programs",
     ctaLink: "#contact",
     icon: HeartPulse,
-    gradient: "from-teal-500 to-green-500",
+    gradient: "from-pink-500 to-rose-500",
+    subtitle: "WORKFORCE HEALTH SOLUTIONS",
+    tagline: "Keeping your team healthy, safe, and compliant",
+    description:
+      "From preventive screenings to emergency response, our health services ensure workforce safety and organizational compliance.",
+    services: [
+      "Pre-employment medical screening",
+      "Onsite health clinics",
+      "Emergency response teams",
+      "Mental health and wellness programs",
+      "Vaccinations and health campaigns",
+    ],
+    ctaTitle: "Health Programs That Protect",
+    ctaDescription:
+      "Safeguard employees and meet compliance requirements with our integrated health solutions.",
+    solutionTitle: "OCCUPATIONAL & WELLNESS PROGRAMS",
+    solutionTagline: "Supporting health, compliance, and readiness",
+    solutionDescription:
+      "We provide complete occupational health and wellness services designed to keep your workforce healthy, compliant, and prepared.",
+  },
+  {
+    id: "it-cybersecurity",
+    slug: "it-cybersecurity",
+    name: "IT Cybersecurity",
+    shortDescription: "Comprehensive technology support solutions",
+    headline: "Secure & Reliable IT Services for Modern Operations",
+    overview:
+      "Our IT support services provide the backbone for your digital operations. From helpdesk assistance to cybersecurity and cloud solutions, we keep your systems running smoothly and securely.",
+    features: [
+      { icon: Laptop, text: "Helpdesk & user support" },
+      { icon: Cloud, text: "Cloud infrastructure management" },
+      { icon: Lock, text: "Cybersecurity solutions" },
+      { icon: Server, text: "Network & server maintenance" },
+    ],
+    industryAlignment: {
+      title: "Digital Security & Operational Resilience",
+      points: [
+        "NIST cybersecurity framework compliance",
+        "FedRAMP-aligned cloud solutions",
+        "24/7 monitoring & incident response",
+        "Data privacy & HIPAA compliance support",
+      ],
+    },
+    valuePropositions: [
+      { icon: Zap, text: "Fast, reliable IT response" },
+      { icon: Shield, text: "Enhanced security posture" },
+      { icon: DollarSign, text: "Optimized IT costs" },
+      { icon: Smile, text: "Improved user experience" },
+    ],
+    ctaText: "Get IT Support",
+    ctaLink: "#contact",
+    icon: Laptop,
+    gradient: "from-blue-500 to-cyan-500",
+    subtitle: "RELIABLE IT SERVICES",
+    tagline: "Technology that keeps your business connected and secure",
+    description:
+      "We deliver IT support that ensures uptime, data protection, and secure digital transformation.",
+    services: [
+      "Helpdesk and user support",
+      "Cybersecurity assessments",
+      "Cloud migration and management",
+      "Network administration",
+      "Disaster recovery planning",
+    ],
+    ctaTitle: "Technology That Works",
+    ctaDescription:
+      "Strengthen your IT backbone with our reliable, secure, and cost-effective solutions.",
+    solutionTitle: "COMPLETE IT SUPPORT",
+    solutionTagline: "From helpdesk to cloud infrastructure",
+    solutionDescription:
+      "Our IT support covers the full stack of enterprise needs, with security-first solutions to keep you running.",
+  },
+  {
+    id: "janitorial-services",
+    slug: "janitorial-services",
+    name: "Janitorial Services",
+    shortDescription: "Comprehensive cleaning and sanitation",
+    headline: "Creating Safe, Clean & Healthy Environments",
+    overview:
+      "Professional janitorial solutions that maintain cleanliness, hygiene, and safety. We provide daily cleaning, deep sanitization, and green cleaning programs for organizations of all sizes.",
+    features: [
+      { icon: BrushCleaning, text: "Daily cleaning services" },
+      { icon: Droplets, text: "Sanitization programs" },
+      { icon: SprayCan, text: "Specialized deep cleaning" },
+      { icon: RecycleIcon, text: "Eco-friendly cleaning solutions" },
+    ],
+    industryAlignment: {
+      title: "Health Standards & Environmental Responsibility",
+      points: [
+        "CDC-aligned sanitization practices",
+        "Green Seal certified cleaning products",
+        "EPA-approved disinfectant use",
+        "Indoor air quality management",
+      ],
+    },
+    valuePropositions: [
+      { icon: Shield, text: "Health & hygiene compliance" },
+      { icon: Leaf, text: "Eco-friendly cleaning" },
+      { icon: Zap, text: "Consistently clean facilities" },
+      { icon: Smile, text: "Improved occupant satisfaction" },
+    ],
+    ctaText: "Book Janitorial Services",
+    ctaLink: "#contact",
+    icon: BrushCleaning,
+    gradient: "from-purple-500 to-indigo-500",
+    subtitle: "CLEAN & SAFE ENVIRONMENTS",
+    tagline: "Hygienic spaces that inspire trust and comfort",
+    description:
+      "Our janitorial services ensure hygienic, sustainable, and spotless facilities that meet the highest health standards.",
+    services: [
+      "Daily office and facility cleaning",
+      "Restroom sanitation",
+      "Deep cleaning and disinfection",
+      "Special event cleaning",
+      "Sustainable green cleaning",
+    ],
+    ctaTitle: "Sanitation That Protects",
+    ctaDescription:
+      "Ensure the health, comfort, and confidence of all facility occupants with our professional cleaning solutions.",
+    solutionTitle: "FULL-SERVICE JANITORIAL PROGRAMS",
+    solutionTagline: "From daily upkeep to specialized sanitation",
+    solutionDescription:
+      "We provide comprehensive janitorial services with flexible scheduling, eco-friendly products, and adherence to health guidelines.",
+  },
+  {
+    id: "security-services",
+    slug: "security-services",
+    name: "Security Services",
+    shortDescription: "Comprehensive safety and asset protection",
+    headline: "Protecting People, Property & Assets",
+    overview:
+      "Security services that combine trained personnel, modern technology, and proactive monitoring to safeguard your operations. We provide on-site, mobile, and digital security solutions tailored to your risks.",
+    features: [
+      { icon: Eye, text: "24/7 monitoring" },
+      { icon: Key, text: "Access control systems" },
+      { icon: Bell, text: "Alarm & incident response" },
+      { icon: Camera, text: "Surveillance operations" },
+    ],
+    industryAlignment: {
+      title: "Safety, Compliance & Risk Management",
+      points: [
+        "Compliance with DHS and local security standards",
+        "Trained and licensed security personnel",
+        "Integration with physical and digital security",
+        "Incident reporting and risk assessments",
+      ],
+    },
+    valuePropositions: [
+      { icon: Shield, text: "24/7 safety assurance" },
+      { icon: Zap, text: "Fast incident response" },
+      { icon: Users, text: "Professional trained staff" },
+      { icon: DollarSign, text: "Reduced security risks" },
+    ],
+    ctaText: "Request Security Assessment",
+    ctaLink: "#contact",
+    icon: Shield,
+    gradient: "from-gray-700 to-black",
+    subtitle: "SECURITY YOU CAN TRUST",
+    tagline: "Proactive protection for what matters most",
+    description:
+      "We provide integrated security solutions combining personnel, technology, and compliance with industry standards.",
+    services: [
+      "Onsite security guards",
+      "Mobile patrols",
+      "Video monitoring & surveillance",
+      "Access control system management",
+      "Emergency response coordination",
+    ],
+    ctaTitle: "Security Without Compromise",
+    ctaDescription:
+      "Protect your people, property, and reputation with our professional security services.",
+    solutionTitle: "COMPLETE SECURITY SOLUTIONS",
+    solutionTagline: "From physical to digital protection",
+    solutionDescription:
+      "Our security services integrate trained personnel, advanced technology, and compliance practices to provide complete protection.",
   },
 ]

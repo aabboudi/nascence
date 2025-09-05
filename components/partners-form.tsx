@@ -54,7 +54,7 @@ const formSchema = z.object({
   partner_role: z.string().min(1).min(1).max(50),
   email: z.string(),
   phone_number: z.string().optional(),
-  partner_contract_vehicle: z.string().min(1).min(1).max(100),
+  partner_contract_vehicle: z.string().max(100).optional(),
   partner_naics: z.array(z.string()).min(1, {
     error: "Please select at least one item"
   }),
@@ -73,18 +73,27 @@ export default function PartnersForm() {
   const form = useForm < z.infer < typeof formSchema >> ({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      "partner_naics": []
+      first_name: "",
+      last_name: "",
+      company_name: "",
+      partner_role: "",
+      email: "",
+      phone_number: "",
+      partner_contract_vehicle: "",
+      partner_naics: [],
+      partner_message: "",
     },
   })
 
   function onSubmit(values: z.infer < typeof formSchema > ) {
     try {
       console.log(values);
-      toast(
-        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-          <code className="text-white">{JSON.stringify(values, null, 2)}</code>
-        </pre>
-      );
+      
+      // toast(
+      //   <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
+      //     <code className="text-white">{JSON.stringify(values, null, 2)}</code>
+      //   </pre>
+      // );
     } catch (error) {
       console.error("Form submission error", error);
       toast.error("Failed to submit the form. Please try again.");
@@ -93,7 +102,7 @@ export default function PartnersForm() {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 max-w-3xl mx-auto py-10">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 max-w-3xl mx-auto px-4 lg:px-0 py-10">
         
         <div className="grid grid-cols-12 gap-4">
           
@@ -298,7 +307,8 @@ export default function PartnersForm() {
             </FormItem>
           )}
         />
-        <Button type="submit">Submit</Button>
+        <Button className="cursor-pointer" type="submit">Submit</Button>
+        <Button className="cursor-pointer ml-3" type="reset" variant="outline" onClick={() => form.reset()}>Reset</Button>
       </form>
     </Form>
   )

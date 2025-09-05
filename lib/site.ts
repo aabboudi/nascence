@@ -3,13 +3,15 @@ export type SiteConfig = typeof siteConfig;
 export const siteConfig = {
   name: "Nascence Group",
   description: "Placeholder.",
-  callToAction: {
-    label: "Schedule a Call",
-    href: "/schedule-a-call",
-  },
   address: {
-    street: "1420 N. Cooper St, Ste. 104",
-    city: "Arlington, TX 76011",
+    main: {
+      street: "1420 N. Cooper St, Ste. 104",
+      city: "Arlington, TX 76011",
+    },
+    branch: {
+      street: "2423 Maryland Ave, Ste. 301",
+      city: "Baltimore, MD 21218",
+    }
   },
   contact: {
     email: "info@thenascencegroup.com",
@@ -42,7 +44,7 @@ export const siteConfig = {
     },
   ],
   links: {
-    linkedin: "#",
-    instagram: "#",
+    linkedin: "https://www.linkedin.com/company/nascence-group/",
+    facebook: "https://facebook.com/Thenascencegroup/",
   },
 };

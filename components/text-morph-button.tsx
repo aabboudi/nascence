@@ -15,7 +15,7 @@ export function TextMorphLoop({ texts }: { texts: string[]}) {
   }, []);
 
   return (
-    <Badge variant={'secondary'} className="inline-flex items-center gap-2">
+    <Badge variant={'secondary'} className="inline-flex items-center gap-2 text-md">
       <TextMorph>{texts[index]}</TextMorph>
     </Badge>
   );

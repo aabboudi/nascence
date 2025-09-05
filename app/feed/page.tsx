@@ -14,7 +14,7 @@ import { BlogFilters } from "@/components/feed/blog-filters"
 import { CTA } from "@/components/cta"
 import { SectionTitle } from "@/components/section-title"
 
-const ARTICLES_PER_PAGE = 6
+const ARTICLES_PER_PAGE = 10
 
 export default function FeedPage() {
   const [searchQuery, setSearchQuery] = useState("")
@@ -74,23 +74,17 @@ export default function FeedPage() {
 
   return (
     <main>
-      <SectionTitle
+      {/* <SectionTitle
         isHero={true}
         badge="Industry Insights"
         title="The Nascence Feed"
         subtitle="Stay informed with the latest insights on federal contracting, industry trends, compliance updates, and best practices from our expert team."
-      />
+      /> */}
 
       {/* Spotlight Article */}
-      <section className="py-16 bg-background">
+      <section className="pt-32 pb-16 bg-background">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-7xl mx-auto">
-            {/* <div className="text-center mb-12">
-                <Badge variant="outline" className="mb-4 px-4 py-2">
-                  Featured Article
-                </Badge>
-                <h2 className="text-3xl font-bold text-foreground">Latest Insights</h2>
-              </div> */}
             <SpotlightArticle article={spotlightArticle} />
           </div>
         </div>

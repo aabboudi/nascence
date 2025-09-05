@@ -1,17 +1,24 @@
-import { Testimonials } from "@/components/testimonials";
-import { USMap } from "@/components/us-map";
-import Image from "next/image";
+import { HeroMarquee } from "@/components/hero-marquee";
 
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
-import { ScrollingItemsList } from "@/components/hero-bar";
+import { RebrandWelcomeModal } from "@/components/rebrand-welcome";
+import { ServicesSection } from "@/components/services-section";
+import { SectionTitle } from "@/components/section-title";
+import { ProcessSectionHorizontal, ProcessSectionVertical } from "@/components/process-section";
+import HeroSection from "@/components/hero-section";
+import { CTA } from "@/components/cta";
+import CardsSection from "@/components/cards-section";
+
+import { Aperture, HardDrive, TrendingUp, Zap } from "lucide-react";
 
 export default function Home() {
   return (
     <main className="overflow-x-hidden">
-      <div className="min-h-screen w-full relative">
+      <section className="relative z-10 m-2">
+        <RebrandWelcomeModal />
+      </section>
+      <div className="min-h-[60vh] w-full relative">
         {/* Radial Gradient Background from Bottom */}
-        <div
+        {/* <div
           className="absolute inset-0 z-0 dark:hidden"
           style={{
             background: "radial-gradient(125% 125% at 50% 90%, #fff 40%, #475569 100%)",
@@ -21,68 +28,66 @@ export default function Home() {
         <div
           className="absolute inset-0 z-0 hidden dark:block"
           style={{
-            background: "radial-gradient(125% 125% at 50% 90%, #1e293b 40%, #0f172a 100%)",
+            background: "radial-gradient(125% 125% at 50% 90%, #1e293b 30%, #0f172a 100%)",
           }}
-        />
+        /> */}
 
-        <section>
-          <div className="pb-24 pt-12 md:pb-32 lg:pb-56 lg:pt-44">
-            <div className="relative mx-auto flex max-w-7xl flex-col px-6 lg:block">
-              <div className="mx-auto max-w-lg text-center lg:ml-0 lg:w-1/2 lg:text-left">
-                <h1 className="mt-8 max-w-2xl text-balance text-5xl font-medium md:text-6xl lg:mt-16 xl:text-7xl">The Pinnacle of Support Services</h1>
-                {/* Description for a govcon firm */}
-                <p className="mt-8 max-w-2xl text-pretty text-lg">Highly efficient government support services provider.</p>
-
-                <div className="mt-12 flex flex-col items-center justify-center gap-2 sm:flex-row lg:justify-start">
-                  <Button
-                    asChild
-                    size="lg"
-                    className="px-5 text-base">
-                    <Link href="#link">
-                      <span className="text-nowrap">Let&apos;s Talk</span>
-                    </Link>
-                  </Button>
-                  <Button
-                    key={2}
-                    asChild
-                    size="lg"
-                    variant="ghost"
-                    className="px-5 text-base">
-                    <Link href="#link">
-                      <span className="text-nowrap">Request a demo</span>
-                    </Link>
-                  </Button>
-                </div>
-              </div>
-              <div className="mt-12 flex w-full items-center justify-center lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2 lg:justify-end lg:pl-8">
-                <USMap />
-              </div>
-              {/* <Image
-                className="z-1 order-first ml-auto h-56 w-full object-cover invert sm:h-96 lg:absolute lg:inset-0 lg:-right-20 lg:-top-96 lg:order-last lg:h-max lg:w-2/3 lg:object-contain dark:mix-blend-lighten dark:invert-0"
-                src="https://ik.imagekit.io/lrigu76hy/tailark/abstract-bg.jpg?updatedAt=1745733473768"
-                alt="Abstract Object"
-                height="4000"
-                width="3000"
-              /> */}
-            </div>
-          </div>
-        </section>
+        <HeroSection />
       </div>
-      <div>
 
-        <ScrollingItemsList
-          items={[
-            "Acme Corp",
-            "Globex Inc.",
-            "ISO 9001",
-            "CyberSecure Certified",
-            "Wayne Enterprises",
-            "Stark Industries",
-            "SOC 2 Compliant",
-          ]}
-        />
+      {/* <SectionTitle
+        badge="Our Credentials"
+        title="Certifications, Clients, and Services"
+        subtitle="Go over all the things that make us the best fit for your organization's needs."
+      /> */}
+      <HeroMarquee />
 
-      </div>
+      <SectionTitle
+        isHero
+        badge="Our Services"
+        title="Comprehensive Support Solutions"
+        subtitle="Our management team has 70 years of combined experience in several projects for the Federal Government. Trust Nascence Group to drive your success with precision and excellence."
+      />
+      <ServicesSection />
+
+      <SectionTitle
+        isHero
+        badge="Let&apos;s Talk"
+        title="How It Works"
+        subtitle="Our mission is to provide you with the best service, the right technology, and the right solutions to elevate your business - without the stress"
+      />
+      <div className="hidden lg:block"><ProcessSectionHorizontal /></div>
+      <div className="lg:hidden"><ProcessSectionVertical /></div>
+
+      <CardsSection
+        title="Working with Nascense Group goes beyond reducing your operating cost"
+        cards={[
+          {
+            title: "Scale Faster",
+            desc: "Working with us will allow you to meet your growing demand without occurring all the overhead that comes with hiring.",
+            icon: TrendingUp,
+          },
+          {
+            title: "Quality & Efficiency",
+            desc: " Our reliable and efficient team members work to provide a quality service that makes you look good.",
+            icon: Zap,
+          },
+          {
+            title: "The Latest Equipment",
+            desc: " Take advantage of the latest service equipment without having to make the investment for yourself.",
+            icon: HardDrive,
+          },
+          {
+            title: "Focus on Core Business",
+            desc: " Focus on what you do best. From hiring to payroll, let our team of experts handle the rest.",
+            icon: Aperture,
+          },
+        ]}
+      />
+
+      <CTA />
+
+
     </main>
   );
 }

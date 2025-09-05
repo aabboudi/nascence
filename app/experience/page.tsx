@@ -55,13 +55,13 @@ export default function ExperiencePage() {
         badge="Experience"
         title="Our Experience"
         subtitle="We have a proven track record of delivering exceptional results across various industries, leveraging our expertise to drive success for our clients."
-      >
-        <TextMorphLoop
+      />
+        {/* <TextMorphLoop
           texts={['DoD', 'USDA', 'FAA', 'GSA']}
-        />
-      </SectionTitle>
+        /> */}
+      {/* </SectionTitle> */}
 
-      <main className="pt-20">
+      <main>
         {/* Hero Section */}
         <section className="py-16 bg-muted/30">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -79,10 +79,9 @@ export default function ExperiencePage() {
                         Excellence
                       </span>
                     </h1>
-                    <p className="text-xl text-muted-foreground leading-relaxed">
-                      Our track record speaks for itself. Delivering exceptional results across federal agencies with
-                      consistent growth and outstanding performance ratings.
-                    </p>
+                    <div className="text-xl text-muted-foreground leading-relaxed">
+                      Our track record speaks for itself. We delivered exceptional results across federal agencies with consistent growth and outstanding performance ratings. We worked with <TextMorphLoop texts={['DOD', 'DOS', 'USA', 'DLA', 'USAF', 'FAA']} /> and we want to work with you too.
+                    </div>
                   </div>
 
                   {/* Revenue Card */}

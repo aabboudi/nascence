@@ -1,9 +1,8 @@
 "use client";
 
-import { useRef } from "react";
+import { useEffect, useState, useRef } from "react";
 import { motion } from "motion/react";
 import DottedMap from "dotted-map";
-
 import { useTheme } from "next-themes";
 
 interface MapProps {
@@ -16,63 +15,67 @@ interface MapProps {
 
 const defaultDots = [
   {
-    start: { lat: 47.6062, lng: -122.3321, }, // Seattle (replacing Alaska)
-    end: { lat: -30, lng: -80, }, // Los Angeles
+    start: { lat: 47.6062, lng: -122.3321 },
+    end: { lat: -30, lng: -80 },
   },
   {
-    start: { lat: 47.6062, lng: -122.3321 }, // Seattle (replacing Alaska)
-    end: { lat: -36, lng: -16 }, // Brazil (Brasília)
+    start: { lat: 47.6062, lng: -122.3321 },
+    end: { lat: -36, lng: -16 },
   },
   {
-    start: { lat: -36, lng: -16 }, // Brazil (Brasília)
-    end: { lat: 38.7223, lng: -9.1393 }, // Lisbon
+    start: { lat: -36, lng: -16 },
+    end: { lat: 38.7223, lng: -9.1393 },
   },
   {
-    start: { lat: 51.5074, lng: -0.1278 }, // London
-    end: { lat: 28.6139, lng: 77.209 }, // New Delhi
+    start: { lat: 51.5074, lng: -0.1278 },
+    end: { lat: 8, lng: 110 },
   },
   {
-    start: { lat: 28.6139, lng: 77.209 }, // New Delhi
-    end: { lat: 43.1332, lng: 131.9113 }, // Vladivostok
+    start: { lat: 8, lng: 110 },
+    end: { lat: 43.1332, lng: 131.9113 },
   },
   {
-    start: { lat: 28.6139, lng: 77.209 }, // New Delhi
-    end: { lat: -1.2921, lng: 36.8219 }, // Nairobi
+    start: { lat: 8, lng: 110 },
+    end: { lat: -1.2921, lng: 36.8219 },
   },
-]
+];
 
-export function USMap({
-  dots = defaultDots,
-  lineColor = "#0ea5e9",
-}: MapProps) {
+export function USMap({ dots = defaultDots, lineColor }: MapProps) {
+  const { resolvedTheme } = useTheme();
   const svgRef = useRef<SVGSVGElement>(null);
+  const [svgMap, setSvgMap] = useState<string>("");
+  const [finalLineColor, setFinalLineColor] = useState<string>("");
+  const [dotColor, setDotColor] = useState<string>("");
 
-  const map = new DottedMap({
-    height: 50, 
-    grid: "diagonal",
-    countries: ["USA"], // Focus on USA
-    // Add region filtering to exclude Alaska and Hawaii
-    region: {
-      lat: {
-        min: 24.5, // Southern tip of Florida
-        max: 49.4  // Northern border with Canada
+  useEffect(() => {
+    if (!resolvedTheme) return;
+
+    const dotColor = resolvedTheme === "dark" ? "#FFFFFF60" : "#333333";
+    const finalLineColor =
+      lineColor ??
+      (resolvedTheme === "dark" ? "#88a3deff" : "#1e3a8a");
+
+    setDotColor(dotColor);
+    setFinalLineColor(finalLineColor);
+
+    const map = new DottedMap({
+      height: 50,
+      grid: "diagonal",
+      countries: ["USA"],
+      region: {
+        lat: { min: 24.5, max: 49.4 },
+        lng: { min: -125, max: -66.9 },
       },
-      lng: {
-        min: -125, // West coast
-        max: -66.9 // East coast
-      }
-    }
-  });
+    });
 
-  const { theme } = useTheme();
-  console.log("Current theme:", theme);
+    const svg = map.getSVG({
+      radius: 0.3,
+      color: dotColor,
+      shape: "circle",
+    });
 
-  const svgMap = map.getSVG({
-    radius: 0.30,
-    color: theme === "dark" ? "#FFFFFF60" : "#999999",
-    shape: "circle",
-    // backgroundColor: theme === "dark" ? "black" : "white",
-  });
+    setSvgMap(svg);
+  }, [resolvedTheme, lineColor]);
 
   const projectPoint = (lat: number, lng: number) => {
     const x = (lng + 180) * (800 / 360);
@@ -91,14 +94,17 @@ export function USMap({
 
   return (
     <div className="w-full aspect-[2/1] rounded-lg relative font-sans">
-      <img
-        src={`data:image/svg+xml;utf8,${encodeURIComponent(svgMap)}`}
-        className="h-full w-full pointer-events-none select-none"
-        alt="continental US map"
-        height="495"
-        width="1056"
-        draggable={false}
-      />
+      {svgMap && (
+        <img
+          src={`data:image/svg+xml;utf8,${encodeURIComponent(svgMap)}`}
+          className="h-full w-full pointer-events-none select-none"
+          alt="continental US map"
+          height="495"
+          width="1056"
+          draggable={false}
+        />
+      )}
+
       <svg
         ref={svgRef}
         viewBox="0 0 800 400"
@@ -114,12 +120,8 @@ export function USMap({
                 fill="none"
                 stroke="url(#path-gradient)"
                 strokeWidth="2"
-                initial={{
-                  pathLength: 0,
-                }}
-                animate={{
-                  pathLength: 1,
-                }}
+                initial={{ pathLength: 0 }}
+                animate={{ pathLength: 1 }}
                 transition={{
                   duration: 2,
                   delay: 0.5 * i,
@@ -128,8 +130,7 @@ export function USMap({
                   repeatType: "reverse",
                   repeatDelay: 3,
                 }}
-                key={`start-upper-${i}`}
-              ></motion.path>
+              />
             </g>
           );
         })}
@@ -137,8 +138,8 @@ export function USMap({
         <defs>
           <linearGradient id="path-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
             <stop offset="0%" stopColor="white" stopOpacity="0" />
-            <stop offset="5%" stopColor={lineColor} stopOpacity="1" />
-            <stop offset="95%" stopColor={lineColor} stopOpacity="1" />
+            <stop offset="5%" stopColor={finalLineColor} stopOpacity="1" />
+            <stop offset="95%" stopColor={finalLineColor} stopOpacity="1" />
             <stop offset="100%" stopColor="white" stopOpacity="0" />
           </linearGradient>
         </defs>
@@ -150,13 +151,13 @@ export function USMap({
                 cx={projectPoint(dot.start.lat, dot.start.lng).x}
                 cy={projectPoint(dot.start.lat, dot.start.lng).y}
                 r="6"
-                fill={lineColor}
+                fill={finalLineColor}
               />
               <circle
                 cx={projectPoint(dot.start.lat, dot.start.lng).x}
                 cy={projectPoint(dot.start.lat, dot.start.lng).y}
                 r="6"
-                fill={lineColor}
+                fill={finalLineColor}
                 opacity="0.5"
               >
                 <animate
@@ -182,13 +183,13 @@ export function USMap({
                 cx={projectPoint(dot.end.lat, dot.end.lng).x}
                 cy={projectPoint(dot.end.lat, dot.end.lng).y}
                 r="6"
-                fill={lineColor}
+                fill={finalLineColor}
               />
               <circle
                 cx={projectPoint(dot.end.lat, dot.end.lng).x}
                 cy={projectPoint(dot.end.lat, dot.end.lng).y}
                 r="6"
-                fill={lineColor}
+                fill={finalLineColor}
                 opacity="0.5"
               >
                 <animate

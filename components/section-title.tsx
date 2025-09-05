@@ -1,8 +1,8 @@
 "use client"
 
-import { motion } from "motion/react";
-import { Badge } from "./ui/badge";
 import { cn } from "@/lib/utils";
+import { FadeUp } from "./fade-up";
+import { Badge } from "./ui/badge";
 
 export function SectionTitle(
   { isHero, badge, title, subtitle, children }: {
@@ -13,17 +13,11 @@ export function SectionTitle(
     children?: React.ReactNode;
   }) {
   return (
-    <div>
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.5 }}
-        className={cn(
-          "mb-12 mx-8 flex flex-col items-center justify-center space-y-4 text-center",
-          isHero && "pt-24",
-        )}
-      >
+    <div className="relative z-10">
+      <FadeUp className={cn(
+        "mb-12 mx-8 flex flex-col items-center justify-center space-y-4 text-center",
+        isHero && "pt-32",
+      )}>
         {/* <Badge
           className="rounded-full px-4 py-1.5 text-sm font-medium shadow-sm"
           variant="secondary"
@@ -44,7 +38,7 @@ export function SectionTitle(
           </h2>
         )}
 
-        <p className="text-muted-foreground max-w-[500px] md:text-lg">
+        <p className="text-balance text-muted-foreground max-w-[500px] md:text-lg">
           {subtitle}
         </p>
 
@@ -53,7 +47,7 @@ export function SectionTitle(
             {children}
           </div>
         )}
-      </motion.div>
+      </FadeUp>
     </div>
   );
 }

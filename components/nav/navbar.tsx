@@ -1,7 +1,8 @@
 'use client'
 import Link from 'next/link'
-// import { Logo } from '@/components/logo'
-import { Globe } from 'lucide-react'
+import Image from 'next/image'
+import Logo from '@/components/logo'
+import { SquareArrowOutUpRight } from 'lucide-react'
 import { Menu, X } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import React from 'react'
@@ -14,16 +15,16 @@ const menuItems = [
   { name: 'Experience', href: '/experience' },
   { name: 'Feed', href: '/feed' },
   { name: 'Partners', href: '/partners' },
-  { name: 'Careers', href: '/careers' },
+  { name: 'Careers', href: 'https://thenascencegroup.isolvedhire.com/jobs/' },
 ]
 
 export default function Navbar() {
-  const [menuState, setMenuState] = React.useState(false)
+  const [isOpen, setIsOpen] = React.useState(false)
   return (
     <header>
       <nav
-        data-state={menuState && 'active'}
-        className="bg-background/50 fixed z-20 w-full border-b backdrop-blur-3xl">
+        data-state={isOpen && 'active'}
+        className="bg-background/50 fixed z-50 w-full border-b backdrop-blur-3xl">
         <div className="mx-auto max-w-6xl px-6 transition-all duration-300">
           <div className="relative flex flex-wrap items-center justify-between gap-6 py-3 lg:gap-0 lg:py-4">
             <div className="flex w-full items-center justify-between gap-12 lg:w-auto">
@@ -31,13 +32,13 @@ export default function Navbar() {
                 href="/"
                 aria-label="home"
                 className="flex items-center space-x-2">
-                <Globe className="mr-2" />
+                <Logo quality={50} size={8} />
                 <span className="font-bold">{siteConfig.name}</span>
               </Link>
 
               <button
-                onClick={() => setMenuState(!menuState)}
-                aria-label={menuState == true ? 'Close Menu' : 'Open Menu'}
+                onClick={() => setIsOpen(!isOpen)}
+                aria-label={isOpen == true ? 'Close Menu' : 'Open Menu'}
                 className="relative z-20 -m-2.5 -mr-4 block cursor-pointer p-2.5 lg:hidden">
                 <Menu className="in-data-[state=active]:rotate-180 in-data-[state=active]:scale-0 in-data-[state=active]:opacity-0 m-auto size-6 duration-200" />
                 <X className="in-data-[state=active]:rotate-0 in-data-[state=active]:scale-100 in-data-[state=active]:opacity-100 absolute inset-0 m-auto size-6 -rotate-180 scale-0 opacity-0 duration-200" />
@@ -49,8 +50,13 @@ export default function Navbar() {
                     <li key={index}>
                       <Link
                         href={item.href}
-                        className="text-muted-foreground hover:text-accent-foreground block duration-150">
+                        className="text-muted-foreground hover:text-accent-foreground block duration-150"
+                        target={item.name === 'Careers' ? '_blank' : '_self'}
+                      >
                         <span>{item.name}</span>
+                        {item.name === 'Careers' && (
+                          <SquareArrowOutUpRight className="ml-1 inline-block size-3" />
+                        )}
                       </Link>
                     </li>
                   ))}
@@ -64,9 +70,15 @@ export default function Navbar() {
                   {menuItems.map((item, index) => (
                     <li key={index}>
                       <Link
+                        className="text-muted-foreground hover:text-accent-foreground block duration-150"
                         href={item.href}
-                        className="text-muted-foreground hover:text-accent-foreground block duration-150">
+                        onClick={() => setIsOpen(false)}
+                        target={item.name === 'Careers' ? '_blank' : '_self'}
+                      >
                         <span>{item.name}</span>
+                        {item.name === 'Careers' && (
+                          <SquareArrowOutUpRight className="ml-1 inline-block size-3" />
+                        )}
                       </Link>
                     </li>
                   ))}
@@ -84,7 +96,7 @@ export default function Navbar() {
                 <Button
                   asChild
                   size="sm">
-                  <Link href="/lets-talk">
+                  <Link href="/lets-talk" onClick={() => setIsOpen(false)}>
                     <span>Let's Talk</span>
                   </Link>
                 </Button>
